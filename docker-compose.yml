@@ -1,0 +1,8 @@
+builder:
+  image:    kendu/projectbuilder
+  command: gulp
+  ports:
+    - 35729:35729
+  volumes:
+    - ./:/opt/web
+  working_dir: /opt/web

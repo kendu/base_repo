@@ -1,0 +1,67 @@
+#!/bin/bash
+
+################################################################################
+#                                                                              #
+#                                 {o,o}                                        #
+#                                 |)__)                                        #
+#                                 -"-"-                                        #
+#                                                                              #
+################################################################################
+#
+#The prebuild script.
+#Main usage is to prepare project files for deployment.
+#
+##############################---VARIABLES---###################################
+
+#Make bower not send statistics
+export CI=true
+REAL_USER_ID=$( id -u ${USER} )
+
+################################################################################
+
+##############################---FUNCTIONS---###################################
+
+function runIntegration() {
+    echo "Running packagers and fixing file permissions"
+    docker run \
+        --rm \
+        -v $(pwd):/opt/web \
+        -e CI=true \
+        -w /opt/web  \
+        kendu/projectbuilder:testing \
+        bash -c "
+if [ -e composer.json ]
+then
+echo ' > Running composer'
+composer install
+fi
+
+if [ -e package.json ]
+then
+echo ' > Running npm'
+npm install --no-bin-links
+fi
+
+if [ -e bower.json ]
+then
+echo ' > Running bower'
+bower install --allow-root
+fi
+
+if [ -e gulpfile.js ]
+then
+echo ' > Running gulp'
+gulp build
+fi
+
+echo ' > Fixing file permissions'
+chown -R ${REAL_USER_ID}:${REAL_USER_ID} ."
+}
+
+################################################################################
+
+###############################---EXECUTION---##################################
+
+runIntegration
+
+################################################################################
