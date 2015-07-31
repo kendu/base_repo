@@ -1,0 +1,9 @@
+{
+  "name": "Base repo",
+  "dependencies": {
+    "fontawesome": "~4.2.0",
+    "jquery": "~2.1.1",
+    "bootstrap-sass": "~3.3.3",
+    "fastclick": "~1.0.6"
+  }
+}

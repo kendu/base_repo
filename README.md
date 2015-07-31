@@ -2,7 +2,7 @@
 
 The base project is meant for the bare project start. It only includes the
 builder container for running gulp in the background as well as the basic
-proviosn script setup.
+provision script setup.
 
 ## getting started
 
