@@ -3,7 +3,6 @@ http:
   volumes:
     - ./provision/nginx/nginx.conf:/etc/nginx/nginx.conf
     - ./provision/nginx/sites-enabled:/etc/nginx/sites-enabled
-    - /etc/localtime:/etc/localtime:ro
     - ./:/opt/web
   environment:
     - VIRTUAL_HOST=test.local
