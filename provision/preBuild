@@ -54,6 +54,12 @@ echo ' > Running gulp'
 gulp build
 fi
 
+if [ -e Gruntfile.js ]
+then
+    echo ' > Runing grunt'
+    grunt
+fi
+
 echo ' > Fixing file permissions'
 chown -R ${REAL_USER_ID}:${REAL_USER_ID} ."
 }
