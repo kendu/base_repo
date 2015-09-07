@@ -1,17 +1,16 @@
 http:
   image: nginx
-  volumes:
-    - ./provision/nginx/nginx.conf:/etc/nginx/nginx.conf
-    - ./provision/nginx/conf.d:/etc/nginx/nginx.conf
-    - ./provision/nginx/sites-enabled-dev:/etc/nginx/sites-enabled
-    - ./:/opt/web
   environment:
     - VIRTUAL_HOST=test.local
-builder:
-  image:    kendu/projectbuilder
-  command: gulp
-  ports:
-    - 35729:35729
+  volumes:
+    - ./provision/nginx/nginx.conf:/etc/nginx/nginx.conf
+    - ./:/opt/web
+  links:
+    - app:app
+app:
+  image: kendu/php:7
   volumes:
     - ./:/opt/web
-  working_dir: /opt/web
+    - ./provision/php/php-fpm.conf:/etc/php5/fpm/php-fpm.conf
+    - ./provision/php/pool.conf:/etc/php5/fpm/pool.d/dev.conf
+    - ./provision/php/php.ini:/etc/php5/fpm/conf.d/99.custom.ini
