@@ -16,6 +16,8 @@
 #Make bower not send statistics
 export CI=true
 REAL_USER_ID=$( id -u ${USER} )
+PERSISTENT_LOCATIONS=( /opt/media /opt/kekec )
+if [ -t 1 ]; then TTY_AVAILABLE="t"; else TTY_AVAILABLE=""; fi
 
 ################################################################################
 
@@ -25,11 +27,12 @@ function runIntegration() {
     echo "Running packagers and fixing file permissions"
     docker run \
         --rm \
+        -i${TTY_AVAILABLE} \
         -v $(pwd):/opt/web \
         -e CI=true \
         -w /opt/web  \
         kendu/projectbuilder:testing \
-        bash -c "
+        bash -i -c "
 if [ -e composer.json ]
 then
 echo ' > Running composer'
@@ -62,11 +65,44 @@ fi
 
 echo ' > Fixing file permissions'
 chown -R ${REAL_USER_ID}:${REAL_USER_ID} ."
+for path in ${PERSISTENT_LOCATIONS[@]}
+do
+    chmod 777 $path
+done
+
+}
+
+function createPersistentContainers() {
+    #App container
+    APP_PERSISTENT_CONTAINER="appPersistentData${1}"
+    if [ -z "$(docker ps -a | grep ${APP_PERSISTENT_CONTAINER} )" ]
+        then
+        echo " > Creating app persistent container ${APP_PERSISTENT_CONTAINER}"
+        docker run \
+            -d \
+            $(for path in ${PERSISTENT_LOCATIONS[@]}; do echo " -v $path "; done ) \
+            --name "${APP_PERSISTENT_CONTAINER}" \
+            kendu/laravelvar \
+            true
+    else
+        echo " > Persistent app container: ${APP_PERSISTENT_CONTAINER} already exists "
+    fi
+    echo ""
 }
 
 ################################################################################
 
 ###############################---EXECUTION---##################################
+
+case ${BUILD_ENV} in
+    "staging" | "production")
+        createPersistentContainers "${BUILD_ENV^}${PROJECT_NAME^}"
+        ;;
+
+    *)
+        createPersistentContainers "$( basename $( pwd ) )dev"
+        ;;
+esac
 
 runIntegration
 
