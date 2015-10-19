@@ -95,7 +95,7 @@ function createPersistentContainers() {
 ###############################---EXECUTION---##################################
 
 case ${BUILD_ENV} in
-    "staging" | "production")
+    "staging" | "production" | "beta" )
         createPersistentContainers "${BUILD_ENV^}${PROJECT_NAME^}"
         ;;
 
