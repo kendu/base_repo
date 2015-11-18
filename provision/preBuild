@@ -16,8 +16,7 @@
 #Make bower not send statistics
 export CI=true
 REAL_USER_ID=$( id -u ${USER} )
-PERSISTENT_LOCATIONS=( /opt/media /opt/kekec )
-if [ -t 1 ]; then TTY_AVAILABLE="t"; else TTY_AVAILABLE=""; fi
+if [ -t 1 ]; then TTY_AVAILABLE="-it"; else TTY_AVAILABLE=""; fi
 
 ################################################################################
 
@@ -27,11 +26,11 @@ function runIntegration() {
     echo "Running packagers and fixing file permissions"
     docker run \
         --rm \
-        -i${TTY_AVAILABLE} \
+        ${TTY_AVAILABLE} \
         -v $(pwd):/opt/web \
         -e CI=true \
         -w /opt/web  \
-        kendu/projectbuilder:testing \
+        kendu/projectbuilder \
         bash -i -c "
 if [ -e composer.json ]
 then
@@ -43,6 +42,7 @@ if [ -e package.json ]
 then
 echo ' > Running npm'
 npm install --no-bin-links
+npm rebuild node-sass
 fi
 
 if [ -e bower.json ]
@@ -64,16 +64,16 @@ then
 fi
 
 echo ' > Fixing file permissions'
-chown -R ${REAL_USER_ID}:${REAL_USER_ID} ."
-for path in ${PERSISTENT_LOCATIONS[@]}
-do
-    chmod 777 $path
-done
+chown -R ${REAL_USER_ID:-33} .
+echo ' > Finished'
+exit 0
+"
 
 }
 
 function createPersistentContainers() {
     #App container
+    echo "appPersistentData${1}"
     APP_PERSISTENT_CONTAINER="appPersistentData${1}"
     if [ -z "$(docker ps -a | grep ${APP_PERSISTENT_CONTAINER} )" ]
         then
