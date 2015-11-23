@@ -109,7 +109,7 @@ else
     createDatabase
     # importLocations
 fi
-real_user=${REAL_USER:$USER}
+real_user=${REAL_USER:-$USER}
 chown ${real_user}:${real_user} ${DBLOG}
 
 ################################################################################

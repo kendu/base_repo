@@ -16,6 +16,7 @@
 #Make bower not send statistics
 export CI=true
 REAL_USER_ID=$( id -u ${USER} )
+PERSISTENT_LOCATIONS=( /opt/media )
 if [ -t 1 ]; then TTY_AVAILABLE="-it"; else TTY_AVAILABLE=""; fi
 
 ################################################################################
@@ -28,10 +29,18 @@ function runIntegration() {
         --rm \
         ${TTY_AVAILABLE} \
         -v $(pwd):/opt/web \
+        --volumes-from $APP_PERSISTENT_CONTAINER \
         -e CI=true \
         -w /opt/web  \
         kendu/projectbuilder \
         bash -i -c "
+echo 'Creating required paths'
+for p in ${PERSISTENT_LOCATIONS[@]}
+do
+    echo \" >> Fixing path \$p \"
+    mkdir -p \$p
+    chmod 777 \$p
+done
 if [ -e composer.json ]
 then
 echo ' > Running composer'
@@ -65,6 +74,11 @@ fi
 
 echo ' > Fixing file permissions'
 chown -R ${REAL_USER_ID:-33} .
+for path in ${PERSISTENT_LOCATIONS[@]}
+do
+    mkdir -p $path
+    chmod 777 $path
+done
 echo ' > Finished'
 exit 0
 "
