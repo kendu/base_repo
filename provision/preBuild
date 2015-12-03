@@ -74,11 +74,6 @@ fi
 
 echo ' > Fixing file permissions'
 chown -R ${REAL_USER_ID:-33} .
-for path in ${PERSISTENT_LOCATIONS[@]}
-do
-    mkdir -p $path
-    chmod 777 $path
-done
 echo ' > Finished'
 exit 0
 "
