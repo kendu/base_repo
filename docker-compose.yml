@@ -2,9 +2,9 @@ http:
   image: nginx
   volumes:
     - ./provision/nginx/nginx.conf:/etc/nginx/nginx.conf
-    - ./provision/nginx/conf.d:/etc/nginx/nginx.conf
-    - ./provision/nginx/sites-enabled-dev:/etc/nginx/sites-enabled
-    - ./:/opt/web
+    - ./provision/nginx/conf.d/:/etc/nginx/conf.d/
+    - ./provision/nginx/sites-enabled-dev/:/etc/nginx/sites-enabled/
+    - ./:/opt/web/
   environment:
     - VIRTUAL_HOST=test.local
 builder:

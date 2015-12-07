@@ -1,15 +1,16 @@
-var gulp        = require('gulp'),
-    gulpif      = require('gulp-if'),
-    sourcemaps  = require('gulp-sourcemaps'),
-    stripDebug  = require('gulp-strip-debug'),
-    jshint      = require('gulp-jshint'),
-    uglify      = require('gulp-uglify'),
-    concat      = require('gulp-concat'),
-    sass        = require('gulp-sass'),
-    minifyCSS   = require('gulp-minify-css');
-    livereload  = require('gulp-livereload');
-    autoprefixer = require('gulp-autoprefixer');
-    image       = require('gulp-image');
+var gulp            = require('gulp'),
+    gulpif          = require('gulp-if'),
+    sourcemaps      = require('gulp-sourcemaps'),
+    stripDebug      = require('gulp-strip-debug'),
+    jshint          = require('gulp-jshint'),
+    uglify          = require('gulp-uglify'),
+    concat          = require('gulp-concat'),
+    sass            = require('gulp-sass'),
+    minifyCSS       = require('gulp-minify-css');
+    livereload      = require('gulp-livereload');
+    autoprefixer    = require('gulp-autoprefixer');
+    imagemin        = require('gulp-imagemin');
+    pngquant        = require('imagemin-pngquant');
 
 
 var debug = (process.env.ENVIRONMENT == 'local');
@@ -109,7 +110,11 @@ gulp.task('images', function() {
 
 gulp.task('images-build', function() {
     return gulp.src('web/images/**/*.{gif,jpg,png,svg}')
-    .pipe(image())
+    .pipe(imagemin({
+		progressive: true,
+		svgoPlugins: [{removeViewBox: false}],
+		use: [pngquant()]
+	}))
     .pipe(gulp.dest('build/images'));
 })
 
