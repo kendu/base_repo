@@ -60,16 +60,16 @@ echo ' > Running bower'
 bower install --allow-root
 fi
 
-if [ -e gulpfile.js ]
-then
-echo ' > Running gulp'
-gulp build
-fi
-
 if [ -e Gruntfile.js ]
 then
     echo ' > Runing grunt'
     grunt
+fi
+
+if [ -e gulpfile.js ]
+then
+echo ' > Running gulp'
+gulp build
 fi
 
 echo ' > Fixing file permissions'
