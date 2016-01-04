@@ -8,7 +8,7 @@ http:
   links:
     - app:app
 app:
-  image: kendu/php:7
+  image: kendu/php:7.0
   volumes:
     - ./:/opt/web
     - ./provision/php/php-fpm.conf:/etc/php5/fpm/php-fpm.conf
