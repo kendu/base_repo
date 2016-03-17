@@ -25,16 +25,16 @@ if [ -t 1 ]; then TTY_AVAILABLE="-it"; else TTY_AVAILABLE=""; fi
 ##############################---FUNCTIONS---###################################
 
 function createLocalPaths() {
-    echo " > Creatieng local directory structure"
+    echo "INFO: Creatieng local directory structure"
     for location in ${LOCAL_LOCATIONS[@]}
     do
-        echo " >> Creating directory $location"
+        echo " > Creating directory $location"
         mkdir -p $location
     done
 }
 
 function runIntegration() {
-    echo "Running packagers and fixing file permissions"
+    echo "INFO: Running packagers and fixing file permissions"
     docker run \
         --rm \
         ${TTY_AVAILABLE} \
@@ -44,7 +44,7 @@ function runIntegration() {
         -w /opt/web  \
         kendu/projectbuilder \
         bash -i -c "
-echo 'Creating required paths'
+echo 'INFO: Creating required paths'
 for p in ${PERSISTENT_LOCATIONS[@]}
 do
     echo \" >> Fixing path \$p \"
@@ -53,36 +53,36 @@ do
 done
 if [ -e composer.json ]
 then
-echo ' > Running composer'
+echo 'INFO: Running composer'
 composer install
 fi
 
 if [ -e package.json ]
 then
-echo ' > Running npm'
+echo 'INFO: Running npm'
 npm install --no-bin-links
 npm rebuild node-sass
 fi
 
 if [ -e bower.json ]
 then
-echo ' > Running bower'
+echo 'INFO: Running bower'
 bower install --allow-root
 fi
 
 if [ -e Gruntfile.js ]
 then
-    echo ' > Runing grunt'
+    echo 'INFO: Runing grunt'
     grunt
 fi
 
 if [ -e gulpfile.js ]
 then
-echo ' > Running gulp'
+echo 'INFO: Running gulp'
 gulp build
 fi
 
-echo ' > Fixing file permissions'
+echo 'INFO: Fixing file permissions'
 chown -R ${REAL_USER_ID:-33} .
 echo ' > Finished'
 exit 0
@@ -91,12 +91,10 @@ exit 0
 }
 
 function createPersistentContainers() {
-    #App container
-    echo "appPersistentData${1}"
     APP_PERSISTENT_CONTAINER="appPersistentData${1}"
     if [ -z "$(docker ps -a | grep ${APP_PERSISTENT_CONTAINER} )" ]
         then
-        echo " > Creating app persistent container ${APP_PERSISTENT_CONTAINER}"
+        echo "INFO: Creating app persistent container ${APP_PERSISTENT_CONTAINER}"
         docker run \
             -d \
             $(for path in ${PERSISTENT_LOCATIONS[@]}; do echo " -v $path "; done ) \
@@ -104,7 +102,7 @@ function createPersistentContainers() {
             kendu/laravelvar \
             true
     else
-        echo " > Persistent app container: ${APP_PERSISTENT_CONTAINER} already exists "
+        echo "INFO: Persistent app container: ${APP_PERSISTENT_CONTAINER} already exists "
     fi
     echo ""
 }

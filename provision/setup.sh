@@ -37,20 +37,20 @@ if  [ ${DOCKER_PULL} == true ] ||
     [ ! -e "${DOCKER_PULL_LOCK}" ] ||
     [[ "$(date -r ${DOCKER_PULL_LOCK} +%F )" != "$(date +%F )" ]]
     then
-    echo " > Checking for docker image updates"
+    echo "INFO: Checking for docker image updates"
     touch ${DOCKER_PULL_LOCK}
     for image in ${DOCKER_IMAGES[@]}
     do
         docker pull $image
     done
 else
-    echo " > Docker images have already been updated today, to force use '--pull'"
+    echo "INFO: Docker images have already been updated today, to force use '--pull'"
 fi
 
 #Run the integration script
 ./provision/preBuild
 
-echo " > Starting containers"
+echo "INFO: Starting containers"
 docker-compose up -d --no-recreate
 
 #Provision
@@ -66,6 +66,6 @@ docker run \
 -v /var/run/docker.sock:/tmp/docker.sock \
 kendu/nginx-proxy
 
-echo "That's it, have a nice day :)"
+echo "DONE: That's it, have a nice day :)"
 
 ################################################################################
