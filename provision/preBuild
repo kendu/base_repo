@@ -25,7 +25,7 @@ if [ -t 1 ]; then TTY_AVAILABLE="-it"; else TTY_AVAILABLE=""; fi
 ##############################---FUNCTIONS---###################################
 
 function createLocalPaths() {
-    echo "INFO: Creatieng local directory structure"
+    echo "INFO: Creating local directory structure"
     for location in ${LOCAL_LOCATIONS[@]}
     do
         echo " > Creating directory $location"
@@ -72,7 +72,7 @@ fi
 
 if [ -e Gruntfile.js ]
 then
-    echo 'INFO: Runing grunt'
+    echo 'INFO: Running grunt'
     grunt
 fi
 
