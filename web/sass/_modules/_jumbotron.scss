@@ -1,0 +1,91 @@
+/*------------------------------------*\
+    Jumbotron
+\*------------------------------------*/
+
+.jumbotron {
+    position: relative;
+    z-index: 1;
+    font-size: 24px;
+    background-size: cover;
+    background-position: center;
+    color: $color-white;
+}
+
+.jumbotron__title {
+    font-weight: bold;
+}
+
+.jumbotron--main {
+    min-height: 80vh;
+    background-image: url("images/papers.png");
+
+    @include breakpoint(xs-max) {
+        padding-top: 180px;
+        padding-bottom: 60px;
+    }
+
+
+    &::after {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        top: 0px;
+        background-color: rgba(0, 0, 0, 0.2);
+        content: "";
+        z-index: -1;
+    }
+
+    .jumbotron__text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+
+        @include breakpoint(xs-max) {
+            position: static;
+            transform: translate(0%, 0%);
+        }
+    }
+}
+
+.jumbotron--subsection {
+    padding-top: 240px;
+    padding-bottom: 240px;
+    text-align: center;
+
+    &::after {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        top: 0px;
+        background-color: rgba(154, 116, 116, 0.3);
+        content: "";
+        z-index: -1;
+    }
+
+    .jumbotron__title {
+        text-transform: uppercase;
+    }
+}
+
+.jumbotron--users {
+    background-image: url("images/womansea.jpg");
+}
+
+.jumbotron--eecard {
+    background-image: url("images/eecard-image.jpg");
+}
+
+.jumbotron--plain {
+    background-color: $color-gray03;
+    padding-top: 90px;
+    padding-bottom: 30px;
+
+    @include breakpoint(xs-max) {
+        padding-top: 180px;
+        padding-bottom: 60px;
+    }
+}

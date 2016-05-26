@@ -42,7 +42,7 @@ function runIntegration() {
         --volumes-from $APP_PERSISTENT_CONTAINER \
         -e CI=true \
         -w /opt/web  \
-        kendu/projectbuilder \
+        kendu/projectbuilder:testing \
         bash -i -c "
 echo 'INFO: Creating required paths'
 for p in ${PERSISTENT_LOCATIONS[@]}
@@ -61,7 +61,7 @@ if [ -e package.json ]
 then
 echo 'INFO: Running npm'
 npm install --no-bin-links
-npm rebuild node-sass
+npm rebuild
 fi
 
 if [ -e bower.json ]

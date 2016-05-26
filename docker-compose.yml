@@ -8,10 +8,11 @@ http:
   environment:
     - VIRTUAL_HOST=test.local
 builder:
-  image:    kendu/projectbuilder
+  image:    kendu/projectbuilder:testing
   command: gulp
   ports:
     - 35729:35729
   volumes:
     - ./:/opt/web
   working_dir: /opt/web
+

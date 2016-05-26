@@ -1,26 +1,30 @@
-/**
- * Variables and Bootstrap overrides
- */
+/*------------------------------------*\
+    Variables and Bootstrap overrides
+\*------------------------------------*/
 
 /* Colors */
-$color-default: #101413;
+$color-default: #a3a3a3;
 
 /* Stack colors like this depending on shades */
-$color-primary: #E01B27;
-$color-primary02: #7E1B27;
-$color-primary03: rgb(243, 156, 134);
-$color-primary04: rgb(250, 204, 189);
-
-$color-secondary: rgb(51, 153, 204);
-
-$color-accent: rgb(252, 204, 51);
+$color-primary: red;
+$color-secondary: #FF6530;
+$color-accent: #FFC930;
 
 $color-supplement: rgb(0, 153, 102);
 
-$color-gray: #5F5A5A;
+$color-gray: #f7f7f7;
+$color-gray02: #e9e9e9;
+$color-gray03: #BEBEBE;
+$color-gray04: #515151;
 
 $color-white: #ffffff;
 $color-black: #000000;
+
+$color-success: #50CE52;
+$color-error: #EF5350;
+
+/* Social networks colors */
+$color-facebook: #3b5998;
 
 /* Font Weight */
 $weight-light: 100;
@@ -30,8 +34,10 @@ $weight-bold: 800;
 $weight-extra-bold: 900;
 
 /* Font families */
-$font-primary: "TisaPro", "Helvetica Neue", Helvetica, sans-serif;
-$font-secondary: "MarkPro", "Helvetica Neue", Helvetica, sans-serif;
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&subset=latin,latin-ext);
+
+$font-primary: "Open Sans", "Helvetica Neue", Helvetica, sans-serif;
+$font-secondary: "Yantramanav", "Helvetica Neue", Helvetica, sans-serif;
 
 /* Breakpoints */
 @mixin breakpoint($point) {

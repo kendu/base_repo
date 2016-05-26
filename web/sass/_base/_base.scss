@@ -1,0 +1,69 @@
+/*------------------------------------*\
+    Base styles
+\*------------------------------------*/
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: $font-primary;
+    font-size: 24px;
+    line-height: 1.5;
+    position: relative;
+    color: $color-default;
+    padding-bottom: 90px;
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 72px;
+}
+
+h2 {
+    font-size: 52px;
+}
+
+h3 {
+    font-size: 32px;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+h5 {
+    font-size: 16px;
+}
+
+a {
+    color: $color-primary;
+
+    &:hover {
+        color: darken($color-primary, 10);
+    }
+}
+
+img {
+    max-width: 100%;
+}
+
+/* Class that will blink - Intended to be put on static elements that needs to be dynamic */
+.hardcoded {
+    color: #f00 !important;
+    animation: hardcode 1s infinite;
+}
+
+@keyframes hardcode {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}

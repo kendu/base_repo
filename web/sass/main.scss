@@ -1,23 +1,19 @@
 /*------------------------------------*\
-    Base CSS - Change it with name of project
+    Jadrnice
 \*------------------------------------*/
 
 /*
  TABLE OF CONTENTS
-    01. Variables....................Imported via gulp and can be found in _vars.scss
-    02. Default Tags.................Like <body>, <h1> etc.
-    03. Components...................Other SCSS components like _dividers.scss, _navigation.scss etc.
-    04. Utilities....................The general styles like align-center etc.
+    01. Bootstrap....................Imported via gulp and can be found in _vars.scss
+    02. Base.........................Like base styles, variables, mixins
+    03. Layouts......................Grid and other layout SCSS
+    04. Modules......................Other SCSS modules like _dividers.scss, _navigation.scss etc.
+    05. Components...................SCSS components specific to page.
+    06. Helpers......................The general styles like align-center etc.
 */
 
 /*------------------------------------*\
-    Variables
-\*------------------------------------*/
-
-@import "web/sass/vars";
-
-/*------------------------------------*\
-    Bootstrap - comment out the @import if you don't need it
+    01. Bootstrap - comment out the @import if you don't need it
 \*------------------------------------*/
 
 // Core variables and mixins
@@ -28,29 +24,30 @@
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/normalize";
 
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/print";
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/glyphicons";
+//@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/glyphicons";
 
 // Core CSS
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/scaffolding";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/type";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/code";
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/grid";
 
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/tables";
+//@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/grid";
+
+//@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/tables";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/forms";
 
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/buttons";
+//@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/buttons";
 
 // Components
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/component-animations";
 
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/dropdowns";
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/button-groups";
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/input-groups";
+//@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/dropdowns";
+//@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/button-groups";
+//@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/input-groups";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/navs";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/navbar";
 
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/breadcrumbs";
+/* @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/breadcrumbs";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/pagination";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/pager";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/labels";
@@ -66,66 +63,58 @@
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/responsive-embed";
 
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/wells";
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/close";
+ */
+
+//@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/close";
 
 // Components w/ JavaScript
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/modals";
+//@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/modals";
 
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/tooltip";
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/popovers";
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/carousel";
+//@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/tooltip";
+//@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/popovers";
+//@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/carousel";
 
 // Utility classes
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/utilities";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
 
 /*------------------------------------*\
-
-    02. Default Tags
-
+    02. Base
 \*------------------------------------*/
 
-body {
-    font-family: $font-primary;
-    font-size: 18px;
-    line-height: 1.5;
-}
-
-img {
-    max-width: 100%;
-}
-
-/* Class that will blink - Intended to be put on static elements that needs to be dynamic */
-.hardcoded {
-    color: #f00 !important;
-    animation: hardcode 1s infinite;
-}
-
-@keyframes hardcode {
-    0% {
-        opacity: 0;
-    }
-
-    50% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
-
+@import "web/sass/_base/config";
+@import "web/sass/_base/base";
+@import "web/sass/_base/fonts";
+@import "web/sass/_base/mixins";
 
 /*------------------------------------*\
-   03. Components
+    03. Layouts
+\*------------------------------------*/
+
+@import "web/sass/_layouts/grid";
+@import "web/sass/_layouts/page-builder";
+
+/*------------------------------------*\
+    04. Modules
+\*------------------------------------*/
+
+@import "web/sass/_modules/header";
+@import "web/sass/_modules/jumbotron";
+@import "web/sass/_modules/headings";
+@import "web/sass/_modules/buttons";
+@import "web/sass/_modules/forms";
+@import "web/sass/_modules/features";
+@import "web/sass/_modules/dividers";
+@import "web/sass/_modules/footer";
+
+/*------------------------------------*\
+   05. Components
 \*------------------------------------*/
 
 //@import "web/sass/components/*name of component*";
 
-@import "web/sass/components/_example";
-
 /*------------------------------------*\
-   04. Helpers
+   06. Helpers
 \*------------------------------------*/
 
-@import "web/sass/utilities";
+@import "web/sass/helpers";

@@ -1,0 +1,135 @@
+/*------------------------------------*\
+    Header
+\*------------------------------------*/
+
+.header {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 10;
+}
+
+.header--static {
+    position: static;
+}
+
+/*------------------------------------*\
+    Navigation
+\*------------------------------------*/
+.navbar--main {
+    margin-bottom: 0px;
+    border-radius: 0px;
+    border-width: 0px;
+
+    .navbar-header {
+        @include breakpoint(xs) {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0px;
+            margin-right: 30px;
+        }
+
+
+        @include breakpoint(xs-max) {
+            margin: 0px;
+        }
+    }
+
+    .navbar-nav {
+        margin-right: 0px;
+
+        @include breakpoint(xs) {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0px;
+            float: right;
+        }
+
+
+        @include breakpoint(xs-max) {
+            margin: 0px;
+        }
+    }
+
+    .navbar-nav li {
+        @include breakpoint(xs) {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+
+        @include breakpoint(xs-max) {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+
+    .navbar-nav li a {
+        padding: 10px 15px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+        color: $color-white;
+        text-transform: uppercase;
+        font-size: 16px;
+
+        &:hover {
+            color: $color-black;
+            background-color: transparent;
+        }
+
+        @include breakpoint(xs-max) {
+            padding: 15px 10px;
+        }
+
+
+        &.navbar__button {
+            margin-right: 15px;
+            padding: 10px 30px;
+
+            &:hover {
+                color: $color-default;
+                background-color: $color-white;
+            }
+
+            @include breakpoint(xs-max) {
+                margin-right: 0px;
+                padding: 10px 20px;
+            }
+        }
+    }
+
+    .navbar-brand {
+        width: 130px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 0px;
+        display: inline-block;
+    }
+}
+
+.nav__language {
+    margin-left: 15px;
+    padding-left: 15px;
+    position: relative;
+
+    &::after {
+        position: absolute;
+        top: 15px;
+        bottom: 15px;
+        left: 0px;
+        width: 1px;
+        background-color: $color-white;
+        content: " ";
+    }
+}
+
+.navbar--dark {
+    background-color: $color-gray03;
+}
+
+/* Bootstrap reset */
+.navbar > .container .navbar-brand,
+.navbar > .container-fluid .navbar-brand {
+    margin-left: 0px;
+}

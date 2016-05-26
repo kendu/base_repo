@@ -1,0 +1,76 @@
+/*------------------------------------*\
+    Forms
+\*------------------------------------*/
+
+.form {
+    .heading--caption {
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+}
+
+.form-control {
+    background-color: $color-white;
+    border-radius: 3px 3px 3px 3px;
+    border-width: 0px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+    height: 43px;
+
+    &:focus {
+        border-width: 0px;
+        box-shadow: inset 0px 0px 5px $color-primary;
+    }
+}
+
+.form--plain {
+    .form-control {
+        border-width: 0;
+        border-bottom: 1px solid $color-gray02;
+        border-radius: 0;
+        background-color: transparent;
+        box-shadow: none;
+        padding-left: 0px;
+        padding-right: 0px;
+        height: 30px;
+        float: none;
+
+        &:focus {
+            border-bottom-color: $color-primary;
+        }
+    }
+
+    textarea.form-control {
+        height: auto;
+    }
+}
+
+
+
+/* Form validation */
+.form {
+    input.parsley-error,
+    select.parsley-error,
+    textarea.parsley-error {
+        border-bottom: 1px solid $color-error;
+    }
+
+    .parsley-errors-list {
+        padding: 0;
+        list-style-type: none;
+        font-size: 0.9em;
+        line-height: 0.9em;
+        opacity: 0;
+        transition: all .3s ease-in;
+        max-height: 0px;
+        color: $color-error;
+
+        li {
+            padding-top: 10px;
+        }
+    }
+
+    .parsley-errors-list.filled {
+        opacity: 1;
+        max-height: 100px;
+    }
+}

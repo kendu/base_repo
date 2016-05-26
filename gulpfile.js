@@ -6,15 +6,13 @@ var gulp            = require('gulp'),
     uglify          = require('gulp-uglify'),
     concat          = require('gulp-concat'),
     sass            = require('gulp-sass'),
-    minifyCSS       = require('gulp-minify-css');
-    livereload      = require('gulp-livereload');
-    autoprefixer    = require('gulp-autoprefixer');
-    imagemin        = require('gulp-imagemin');
-    pngquant        = require('imagemin-pngquant');
+    cleanCSS        = require('gulp-clean-css'),
+    livereload      = require('gulp-livereload'),
+    autoprefixer    = require('gulp-autoprefixer'),
+    imagemin        = require('gulp-imagemin'),
     build           = process.argv[2] === 'build';
 
 var cssLinks = [
-    'bower_components/fontawesome/css/font-awesome.min.css',
     'web/sass/main.scss'
 ];
 
@@ -27,7 +25,6 @@ var jsLinks = [
 ];
 
 var fontLinks = [
-    'bower_components/fontawesome/fonts/**',
     'bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.*',
     'web/fonts/**'
 ];
@@ -42,7 +39,7 @@ gulp.task('styles', function() {
     }))
     .pipe(concat('main.css'))
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
-    .pipe(gulpif(build, minifyCSS()))
+    .pipe(gulpif(build, cleanCSS()))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('build/'))
     .pipe(livereload(
@@ -77,19 +74,15 @@ gulp.task('fonts', function() {
 
 /* Images */
 gulp.task('images', function() {
-    return gulp.src('web/images/**/*.{gif,jpg,png,svg}')
-    .pipe(gulpif(build, imagemin({
-        progressive: true,
-        svgoPlugins: [{removeViewBox: false}],
-        use: [pngquant()]
-    })))
+    return gulp.src('web/images/**/*')
+    .pipe(gulpif(build, imagemin()))
     .pipe(gulp.dest('build/images'));
 })
 
 
 gulp.task('default', ['fonts', 'images', 'styles', 'scripts'], function() {
     livereload.listen();
-    gulp.watch(['web/sass/*.scss', 'web/sass/components/*.scss'], ['styles']);
+    gulp.watch(['web/sass/**/*.scss' ], ['styles']);
     gulp.watch(['web/js/*.js', 'web/js/components/*.js'], ['scripts']);
     gulp.watch(['web/images/**/*.{gif,jpg,png,svg}'], ['images']);
 
