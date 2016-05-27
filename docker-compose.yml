@@ -6,7 +6,7 @@ http:
     - ./provision/nginx/sites-enabled-dev/:/etc/nginx/sites-enabled/
     - ./:/opt/web/
   environment:
-    - VIRTUAL_HOST=php-si.local
+    - VIRTUAL_HOST=test.local
 builder:
   image:    kendu/projectbuilder
   command: gulp

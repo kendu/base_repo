@@ -20,6 +20,8 @@ var jsLinks = [
     'bower_components/jquery/dist/jquery.js',
     'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
     'bower_components/fastclick/lib/fastclick.js',
+    'web/js/cookies/jquery.cookie.js',
+    'web/js/cookies/jquery.cookiecuttr.js',
     'web/js/components/*.js',
     'web/js/main.js'
 ];
@@ -51,8 +53,8 @@ gulp.task('scripts', function() {
   return gulp.src(jsLinks)
     .pipe(sourcemaps.init({loadMaps: true, debug: true}))
     .pipe(concat('front' + '.temp.js'))
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'))
+    .pipe(gulpif(!build, jshint()))
+    .pipe(gulpif(!build, jshint.reporter('default')))
     .pipe(concat('main.js'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulpif(build, uglify().on('error', function(err) {

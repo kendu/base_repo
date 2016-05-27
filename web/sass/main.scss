@@ -1,5 +1,5 @@
 /*------------------------------------*\
-    Jadrnice
+    Base repo
 \*------------------------------------*/
 
 /*
@@ -24,6 +24,7 @@
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/normalize";
 
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/print";
+
 //@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap/glyphicons";
 
 // Core CSS
@@ -112,6 +113,7 @@
 \*------------------------------------*/
 
 //@import "web/sass/components/*name of component*";
+@import "web/sass/_components/cookies";
 
 /*------------------------------------*\
    06. Helpers
