@@ -20,6 +20,7 @@ var jsLinks = [
     'bower_components/jquery/dist/jquery.js',
     'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
     'bower_components/fastclick/lib/fastclick.js',
+    'bower_components/flexibility/dist/flexibility.js',
     'web/js/cookies/jquery.cookie.js',
     'web/js/cookies/jquery.cookiecuttr.js',
     'web/js/components/*.js',
