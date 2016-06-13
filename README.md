@@ -10,7 +10,7 @@ provision script setup.
 * Write package.json file
 * Write composer.json file
 * Write bower.json file
-
+* Update webpack config 
 Of course you don't have to use all of them.
 
 ## Using docker

@@ -5,13 +5,16 @@ http:
     - ./provision/nginx/conf.d/:/etc/nginx/conf.d/
     - ./provision/nginx/sites-enabled-dev/:/etc/nginx/sites-enabled/
     - ./:/opt/web/
+    - ./provision/certs:/opt/certs
   environment:
     - VIRTUAL_HOST=test.local
-builder:
-  image:    kendu/projectbuilder
-  command: gulp
+  links:
+    - node-proxy
   ports:
-    - 35729:35729
+    - 0.0.0.0:443:443
+node-proxy:
+  image:    kendu/projectbuilder
+  command: node server.js
   volumes:
     - ./:/opt/web
   working_dir: /opt/web
